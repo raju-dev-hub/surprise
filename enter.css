@@ -1,53 +1,40 @@
+/* GLOBAL */
 html, body {
   margin: 0;
   padding: 0;
-  background: black;
   height: 100%;
+  background: black;
   overflow: hidden;
   font-family: system-ui, sans-serif;
+  touch-action: none; /* page never scrolls */
 }
 
-/* =================================================
-   NEXT BUTTON UI (TOP-RIGHT, ALWAYS VISIBLE)
-   ================================================= */
-
+/* NEXT BUTTON */
 #next-ui {
   position: fixed;
-  right: 3%;
-  top: 5%;                 /* 🔥 moved to upper side */
-  transform: none;         /* 🔥 remove centering */
+  top: 4%;
+  right: 4%;
+  z-index: 1000;
   text-align: right;
-  z-index: 9999;
-  pointer-events: auto;
 }
 
 .next-text {
-  margin-bottom: 10px;
-  font-size: 0.75rem;
-  letter-spacing: 0.18em;
-  color: rgba(255, 120, 120, 0.75);
+  font-size: 0.7rem;
+  letter-spacing: 0.2em;
+  color: rgba(255,120,120,0.7);
+  margin-bottom: 6px;
 }
 
 #enter-next-btn {
-  padding: 12px 26px;
+  padding: 10px 22px;
   border-radius: 999px;
-  background: rgba(255, 0, 0, 0.18);
-  border: 1px solid rgba(255, 0, 0, 0.45);
-  color: rgba(255, 160, 160, 0.95);
-  font-size: 0.8rem;
-  letter-spacing: 0.22em;
-  cursor: pointer;
-  backdrop-filter: blur(6px);
+  background: rgba(255,0,0,0.2);
+  border: 1px solid rgba(255,0,0,0.5);
+  color: rgba(255,180,180,1);
+  letter-spacing: 0.2em;
 }
 
-#enter-next-btn:hover {
-  box-shadow: 0 0 18px rgba(255, 0, 0, 0.45);
-}
-
-/* =================================================
-   GALLERY LAYOUT
-   ================================================= */
-
+/* GALLERY */
 .gallery-wrapper {
   height: 100%;
   display: flex;
@@ -57,24 +44,21 @@ html, body {
 
 .gallery-track {
   display: flex;
-  gap: 40px;
-  align-items: center;
-  transition: transform 1.2s ease;
+  gap: 32px;
+  transition: transform 0.9s ease;
 }
 
-/* =================================================
-   CARD BASE
-   ================================================= */
-
+/* CARD */
 .card {
-  width: 280px;
+  width: 70vw;               /* 16:9 phone friendly */
+  max-width: 280px;
   flex-shrink: 0;
-  transform: scale(0.7);
+  transform: scale(0.75);
   opacity: 0.35;
-  transition: transform 1s ease, opacity 1s ease;
   display: flex;
   flex-direction: column;
   align-items: center;
+  transition: transform 0.6s ease, opacity 0.6s ease;
 }
 
 .card.active {
@@ -82,56 +66,46 @@ html, body {
   opacity: 1;
 }
 
-/* =================================================
-   IMAGE (LOCKED SIZE)
-   ================================================= */
-
+/* IMAGE */
 .card img {
   width: 100%;
-  height: 380px;
+  height: 50vh;
   object-fit: cover;
-  border-radius: 28px;
-  box-shadow: 0 0 30px rgba(255, 0, 0, 0.15);
-  flex-shrink: 0;
+  border-radius: 26px;
+  box-shadow: 0 0 28px rgba(255,0,0,0.2);
 }
 
-/* =================================================
-   PREVIEW TEXT (NORMAL MODE)
-   ================================================= */
-
+/* PREVIEW TEXT (NORMAL MODE) */
 .caption-preview {
   margin-top: 14px;
-  width: 100%;
+  font-size: 0.8rem;
+  letter-spacing: 0.15em;
+  color: rgba(255,80,80,0.9);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  text-align: center;
-  color: rgba(255, 80, 80, 0.85);
-  font-size: 0.85rem;
-  letter-spacing: 0.18em;
   opacity: 0;
-  transition: opacity 0.6s ease;
 }
 
 .card.active .caption-preview {
   opacity: 1;
 }
 
-/* =================================================
-   COMMENT BOX (HIDDEN BY DEFAULT)
-   ================================================= */
-
+/* COMMENT BOX */
 .comment-box {
   display: none;
-  pointer-events: auto;
-  touch-action: pan-y;
-  overscroll-behavior: contain;
+  margin-top: 16px;
+  max-height: 24vh;
+  padding: 14px;
+  border-radius: 14px;
+  background: rgba(255,0,0,0.08);
+  color: rgba(255,220,220,0.95);
+  line-height: 1.6;
+  overflow-y: auto;
+  touch-action: pan-y; /* vertical scroll only */
 }
 
-/* =================================================
-   FOCUS MODE (RESTORED & WORKING)
-   ================================================= */
-
+/* FOCUS MODE */
 .gallery-wrapper.focus-mode .card {
   transform: scale(0.6);
   opacity: 0.15;
@@ -139,46 +113,15 @@ html, body {
 }
 
 .gallery-wrapper.focus-mode .card.active {
-  transform: scale(1.25);
+  transform: scale(1.15);
   opacity: 1;
   filter: none;
-  z-index: 5;
 }
 
-.gallery-wrapper.focus-mode .card.active img {
-  box-shadow: 0 0 60px rgba(255, 0, 0, 0.35);
-}
-
-/* hide preview in focus mode */
-.gallery-wrapper.focus-mode .card.active .caption-preview {
+.gallery-wrapper.focus-mode .caption-preview {
   display: none;
 }
 
-/* show comment box under image */
 .gallery-wrapper.focus-mode .card.active .comment-box {
   display: block;
-  margin-top: 20px;
-
-  width: 100%;
-  max-height: 180px;
-
-  padding: 14px 16px;
-  border-radius: 16px;
-
-  background: rgba(255, 0, 0, 0.08);
-  border: 1px solid rgba(255, 0, 0, 0.25);
-
-  color: rgba(255, 200, 200, 0.95);
-  font-size: 0.95rem;
-  line-height: 1.6;
-  letter-spacing: 0.08em;
-  text-align: center;
-
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
-}
-
-/* hide scrollbar visually */
-.comment-box::-webkit-scrollbar {
-  width: 0;
 }
