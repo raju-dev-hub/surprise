@@ -23,94 +23,88 @@ function updateCarousel() {
 updateCarousel();
 
 /* ===============================
-   AUTO ANIMATION
+   AUTO SLIDE (PAUSED IN FOCUS)
    =============================== */
 setInterval(() => {
   if (isUserInteracting || focusMode) return;
 
   index += direction;
-
   if (index === cards.length - 1 || index === 0) {
     direction *= -1;
   }
-
   updateCarousel();
 }, 3500);
 
-/* =====================================================
-   DESKTOP SCROLL (mouse wheel)
-   ===================================================== */
+/* ===============================
+   DESKTOP WHEEL
+   =============================== */
 track.addEventListener("wheel", e => {
-  // ⛔ allow comment box to scroll
   if (e.target.closest(".comment-box")) return;
-
   e.preventDefault();
+
   isUserInteracting = true;
 
-  if (e.deltaY > 0 && index < cards.length - 1) {
-    index++;
-  } else if (e.deltaY < 0 && index > 0) {
-    index--;
-  }
+  if (e.deltaY > 0 && index < cards.length - 1) index++;
+  else if (e.deltaY < 0 && index > 0) index--;
 
   updateCarousel();
 
-  clearTimeout(track._scrollTimeout);
-  track._scrollTimeout = setTimeout(() => {
-    isUserInteracting = false;
-  }, 800);
+  clearTimeout(track._t);
+  track._t = setTimeout(() => isUserInteracting = false, 700);
 }, { passive: false });
 
-/* =====================================================
-   MOBILE TOUCH SCROLL (horizontal)
-   ===================================================== */
+/* ===============================
+   MOBILE TOUCH (CORRECTED)
+   =============================== */
 let startX = 0;
+let startY = 0;
+let moved = false;
 
 track.addEventListener("touchstart", e => {
-  // ignore touches starting inside comment box
   if (e.target.closest(".comment-box")) return;
 
-  isUserInteracting = true;
   startX = e.touches[0].clientX;
+  startY = e.touches[0].clientY;
+  moved = false;
 });
 
 track.addEventListener("touchmove", e => {
-  // ⛔ allow vertical swipe in comment box
   if (e.target.closest(".comment-box")) return;
 
-  const currentX = e.touches[0].clientX;
-  const diff = startX - currentX;
+  const dx = e.touches[0].clientX - startX;
+  const dy = e.touches[0].clientY - startY;
 
-  if (Math.abs(diff) > 40) {
-    if (diff > 0 && index < cards.length - 1) {
-      index++;
-    } else if (diff < 0 && index > 0) {
-      index--;
-    }
+  // vertical swipe → ignore carousel
+  if (Math.abs(dy) > Math.abs(dx)) return;
 
-    startX = currentX;
+  if (Math.abs(dx) > 40) {
+    moved = true;
+    isUserInteracting = true;
+
+    if (dx < 0 && index < cards.length - 1) index++;
+    else if (dx > 0 && index > 0) index--;
+
+    startX = e.touches[0].clientX;
     updateCarousel();
   }
 });
 
 track.addEventListener("touchend", () => {
-  setTimeout(() => {
-    isUserInteracting = false;
-  }, 600);
+  setTimeout(() => isUserInteracting = false, 500);
 });
 
-/* =====================================================
-   FOCUS MODE (click / tap on active card)
-   ===================================================== */
+/* ===============================
+   FOCUS MODE (RELIABLE TAP)
+   =============================== */
 cards.forEach(card => {
   card.addEventListener("click", () => {
     if (!card.classList.contains("active")) return;
-
     focusMode = !focusMode;
     wrapper.classList.toggle("focus-mode", focusMode);
   });
 
-  card.addEventListener("touchend", () => {
+  card.addEventListener("touchend", e => {
+    if (moved) return; // ❗ ignore swipe
     if (!card.classList.contains("active")) return;
 
     focusMode = !focusMode;
