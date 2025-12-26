@@ -65,7 +65,7 @@ function animate() {
   ctx.fillStyle = "#000";
   ctx.fillRect(0, 0, canvas.width, canvas.height);
 
-  time += 0.04;
+  time += 0.02;
 
   ctx.strokeStyle = "red";
   ctx.shadowColor = "red";
@@ -100,3 +100,4 @@ function animate() {
 }
 
 animate();
+
