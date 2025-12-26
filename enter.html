@@ -9,169 +9,66 @@
 
 <body>
 
-  <!-- ===============================
-       NEXT BUTTON (TOP LAYER)
-       =============================== -->
+  <!-- NEXT BUTTON -->
   <div id="next-ui">
     <div class="next-text">Click here after done</div>
     <button id="enter-next-btn">NEXT</button>
   </div>
 
-  <!-- ===============================
-       GALLERY
-       =============================== -->
+  <!-- GALLERY -->
   <div class="gallery-wrapper">
     <div class="gallery-track">
 
-      <!-- CARD 1 -->
+      <!-- CARD TEMPLATE (repeat) -->
       <div class="card active">
         <img src="p1.png" />
-        <div class="caption-preview">Your eyes feel like a qui..</div>
+        <div class="caption-preview">Your eyes feel like a quiet recreation…</div>
         <div class="comment-box">
-          Your eyes feel like a quiet recreation of a black hole—<br>
-          deep and powerful—<br>
-          carrying the elegance of a peacock feather,<br>
-          impossible to look away from.<br><br>
-
-          They carry stories of a wish to be loved,
-          stories you never say out loud,
-          yet somehow I understand them completely.<br><br>
-
-          Your eyes don’t seek attention;
-          they own it without asking.<br><br>
-
-          When you look at me with those eyes,
-          I feel fully seen—never judged.<br><br>
-
-          When you smile with your eyes,
-          everything inside me feels lighter.<br><br>
-
-          There is a depth in your gaze
-          that pulls me closer every time,
-          and I find myself wanting to drown
-          again and again in the world that lives inside your eyes.
+          Your eyes feel like a quiet recreation of a black hole—
+          deep, powerful, and impossible to ignore.
         </div>
       </div>
 
-      <!-- CARD 2 -->
       <div class="card">
         <img src="p2.png" />
-        <div class="caption-preview">Your cupid-bow lips—my favo..</div>
-        <div class="comment-box">
-          Your cupid-bow lips—my favorite—<br>
-          carry a smile that feels completely natural, never forced.<br><br>
-
-          When you smile, the whole atmosphere changes,
-          turning into something calm, satisfying, and deeply relaxing.<br><br>
-
-          There’s a warmth in your smile
-          that quietly melts my heart without asking permission.<br><br>
-
-          Your smile turns my ordinary moments into memories
-          worth holding onto.<br><br>
-
-          Every tension I carry seems to leave
-          the moment I see you smile.<br><br>
-
-          When you smile, the world feels less complicated—
-          everything suddenly feels easier.<br><br>
-
-          The softness of your smile
-          is like medicine to me,
-          healing without words.
-        </div>
+        <div class="caption-preview">Your smile softens everything…</div>
+        <div class="comment-box">Full text here…</div>
       </div>
 
-      <!-- CARD 3 -->
       <div class="card">
         <img src="p3.png" />
-        <div class="caption-preview">Your hair flows like a blac..</div>
-        <div class="comment-box">
-          Your hair flows like a black river,<br>
-          choosing its own natural path,<br>
-          free and unforced.<br><br>
-
-          It frames your face as if it has always belonged there,
-          perfectly, without effort.<br><br>
-
-          Your hair never looks arranged;
-          it always looks aesthetic—<br>
-          honest in its chaos, beautiful in its freedom.<br><br>
-
-          When it catches the light,
-          it feels like a horizon of freedom itself,
-          quietly shining,
-          limitless and alive.
-        </div>
+        <div class="caption-preview">Your hair flows freely…</div>
+        <div class="comment-box">Full text here…</div>
       </div>
 
-      <!-- CARD 4 -->
       <div class="card">
         <img src="p4.png" />
-        <div class="caption-preview">Your cute little hands—..</div>
-        <div class="comment-box">
-          Your cute little hands—<br>
-          I can feel their softness even without touching them.<br><br>
-
-          The way you hold things so gently
-          makes my heart long for that same care.<br><br>
-
-          There’s a warmth in your hands
-          that I imagine resting on my face,
-          quiet, comforting, unhurried.<br><br>
-
-          And the presence of your hands—
-          I want to feel it in mine,
-          walking side by side,
-          holding hands as if time itself doesn’t matter.
-        </div>
+        <div class="caption-preview">Your hands feel warm…</div>
+        <div class="comment-box">Full text here…</div>
       </div>
 
-      <!-- CARD 5 -->
       <div class="card">
         <img src="p5.png" />
-        <div class="caption-preview">Your figure is magnetic..</div>
-        <div class="comment-box">
-          Your figure is magnetic—<br>
-          it quietly pulls my desire to look at you,<br>
-          to want you closer,<br>
-          to touch every part of you.<br><br>
-
-          The way you stand feels casual,
-          yet completely impossible to ignore.<br><br>
-
-          The curve of your waist is undeniably sexy,
-          carrying a confidence that knows exactly
-          what it does to my mind.<br><br>
-
-          Your movements follow your own rhythm,
-          natural, unforced, and deeply captivating.<br><br>
-
-          Your figure doesn’t ask to be noticed;
-          it simply commands my heart
-          to bow before you.
-        </div>
+        <div class="caption-preview">Your figure is magnetic…</div>
+        <div class="comment-box">Full text here…</div>
       </div>
 
-      <!-- CARD 6 -->
       <div class="card">
         <img src="p6.png" />
-        <div class="caption-preview">
-          Your voice feels like nature whispering…
-        </div>
+        <div class="caption-preview">Your voice feels like nature whispering…</div>
         <div class="comment-box">
           Your voice feels like nature whispering instead of speaking.
-          It arrives gently, like a breeze that doesn’t want to disturb anything.<br><br>
+          It arrives gently, like a breeze that doesn’t want to disturb anything.
 
           When you sing, even the wind feels quieter,
-          as if it’s listening to you.<br><br>
+          as if it’s listening to you.
 
           Your voice flows like the sea at dawn—
-          calm, steady, and full of quiet depth.<br><br>
+          calm, steady, and full of quiet depth.
 
           There’s a warmth in your voice
           that settles into me slowly,
-          like waves touching the shore without urgency.<br><br>
+          like waves touching the shore without urgency.
 
           I don’t just hear your voice;
           I feel comforted by it,
@@ -183,11 +80,10 @@
   </div>
 
   <script src="enter.js"></script>
-
   <script>
-    document.getElementById("enter-next-btn").addEventListener("click", () => {
-      window.location.href = "next.html";
-    });
+    document.getElementById("enter-next-btn").onclick = () => {
+      location.href = "next.html";
+    };
   </script>
 
 </body>
